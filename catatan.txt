@@ -1,0 +1,26 @@
+Admin & Kepala gudang gabisa nampilin
+Owner bisa nambahin job Title sama User Employee
+*Kepala gudang bisa lihat laporan reorder pointnya
+*supplier cuma 1 kali input di setiap order
+*gudang gaperlu ada di order
+*yang ditampilin di order nanti dari transaksi aja, trus nampilin data detail pas di klik
+
+($this->session->userdata('role_id') == 'gudang') 
+
+
+
+Admin buat order
+Kepala gudang accept order
+Data langsung masuk item in setelah accept order
+Admin buat item out
+Kepala gudang accept itrm out
+
+tambah semua subtotal pada saat order
+tambah subtotal pada detail order
+ganti Keterangan jadi Notes
+
+let idtotal = '#total_price' + count;
+            let idselling = "selling_price" + count;
+
+
+max item buat item out belum di setting bes

@@ -1,0 +1,21 @@
+SEMUA DIHITUNG SEMINGGU KEBELAKANG
+
+lead time = jeda waktu dari order - item in yang terakhir di hari itu
+lead time demand = lead time * rata-rata penjualan perhari
+Safety Stok = (Penjualan harian tertinggi (dalam 1 Minggu) * Lead Time)
+
+
+Dashboard
+10 penjualan teratas beserta 
+
+List of stock
+List barang terlaku
+List barang kurang laku
+
+
+REVISI 14/07/22
+item in ini harusnya sekalian pilih gudang, soalnya kan buat jaga2 misal gudangnya lebih dari 1
+terus ini di transaksi order, kan tak klik submit tanpa klik add. nah itu gabisa di cancel
+order -> supplier + gudang
+item in -> supplier + gudang
+item out -> customer + gudang
