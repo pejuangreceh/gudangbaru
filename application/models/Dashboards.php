@@ -18,7 +18,7 @@ class Dashboards extends CI_Model
         $this->db->order_by('o.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }
-    function read_item_out()
+    function read_item_out($periode = NULL)
     {
         $startDate = date('Y-m-d H:i:s', strtotime("-7 days"));
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
@@ -35,9 +35,16 @@ class Dashboards extends CI_Model
         // $this->db->group_by('o.item_id');
         return $query = $this->db->get()->result();
     }
-    function read_item_out_2()
+    function read_item_out_2($periode = NULL)
     {
-        $startDate = date('Y-m-d H:i:s', strtotime("-7 days"));
+        if(($periode == NULL) || ($periode == 'week')){
+            $startDate = date('Y-m-d H:i:s', strtotime("-7 days"));
+        }elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        }
+        elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
         // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
         $this->db->where('o.created_at >=', $startDate);
@@ -46,7 +53,7 @@ class Dashboards extends CI_Model
         $this->db->from('item_out_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('item_in_tb n', 'n.item_id=o.item_id', 'left');
-        $this->db->order_by('o.created_at', 'DESC');
+        $this->db->order_by('i.item_name', 'ASC');
         // $this->db->group_by('o.item_id');
         $this->db->group_by(array('o.item_id'));
         return $query = $this->db->get()->result();
