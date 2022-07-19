@@ -20,6 +20,15 @@ class ItemController extends CI_Controller
         $this->load->view('item/index', $data);
         $this->load->view('template/footer');
     }
+    public function list_of_stock()
+    {
+        $data['judul'] = 'List of Stock';
+        $data['items']  = $this->items->read();
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('item/index', $data);
+        $this->load->view('template/footer');
+    }
     public function add()
     {
         $data['judul'] = 'Add Item';

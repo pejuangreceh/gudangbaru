@@ -8,9 +8,11 @@
                     <h1><?php echo $judul ?></h1>
                 </div>
                 <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
-                    <div class="col-sm-1">
-                        <a href="<?= base_url('ItemoutController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
-                    </div>
+                    <?php if ($judul != 'List of Selling') { ?>
+                        <div class="col-sm-1">
+                            <a href="<?= base_url('ItemoutController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div><!-- /.container-fluid -->
@@ -33,7 +35,9 @@
                                         <th>Warehouse Name</th>
                                         <th>Transaction Date</th>
                                         <!-- <th>Status</th> -->
+                                        <?php if ($judul != 'List of Selling') { ?>
                                         <th style="width: 20%;">Action</th>
+                                        <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +68,7 @@
                                                     <?php } ?>
                                                 </td>
                                             <?php } ?> -->
+                                            <?php if ($judul != 'List of Selling') { ?>
                                             <td>
                                                 <div class="row">
                                                     <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
@@ -94,6 +99,7 @@
                                                     <?php } ?>
                                                 </div>
                                             </td>
+                                            <?php } ?> 
                                         </tr>
                                     <?php } ?>
                                 </tbody>

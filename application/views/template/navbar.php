@@ -54,7 +54,7 @@
                with font-awesome or any other icon font library -->
 
                         <li class="nav-item">
-                            <a href="<?= base_url('DashboardController/index') ?>" class="nav-link">
+                            <a href="<?= base_url('DashboardController') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
                                     Dashboard
@@ -168,6 +168,29 @@
                                 </a>
                             </li>
                         <?php } ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Report
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?= base_url('ItemController/list_of_stock') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List of Stock</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('ItemoutController/list_of_selling') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List of Selling</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

@@ -86,10 +86,7 @@
                                 </tbody>
                             </table>
                             <input id="counter" value="<?php echo $no; ?>" type="number" hidden>
-                            <div class="col-sm-3">
-                                <button type="submit" class="btn btn-default">Show</button>
-                                <?php echo $periode; ?>
-                            </div>
+                            
                         </div>
                         <!-- /.card-body -->
                     </div>

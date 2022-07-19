@@ -7,9 +7,11 @@
                 <div class="col-sm-11">
                     <h1><?php echo $judul ?></h1>
                 </div>
-                <div class="col-sm-1">
+                <?php if ($judul != 'List of Stock') { ?>
+                    <div class="col-sm-1">
                     <a href="<?= base_url('ItemController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
-                </div>
+                    </div>
+                <?php } ?>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -32,7 +34,10 @@
                                         <th>Stok</th>
                                         <th>Buying Price</th>
                                         <th>Selling Price</th>
-                                        <th style="width: 15%;">Action</th>
+                                        <?php if ($judul != 'List of Stock') { ?>
+                                            <th style="width: 15%;">Action</th>
+                                        <?php } ?>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +53,7 @@
                                             <td><?= $item->stok ?></td>
                                             <td><?= $item->buying_price ?></td>
                                             <td><?= $item->selling_price ?></td>
+                                            <?php if ($judul != 'List of Stock') { ?>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -60,6 +66,7 @@
                                                     <?php } ?>
                                                 </div>
                                             </td>
+                                            <?php } ?>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
