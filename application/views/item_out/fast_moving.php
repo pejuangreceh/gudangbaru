@@ -7,11 +7,7 @@
                 <div class="col-sm-11">
                     <h1><?php echo $judul ?></h1>
                 </div>
-                <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
-                    <div class="col-sm-1">
-                        <a href="<?= base_url('IteminController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
-                    </div>
-                <?php } ?>
+                
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -24,14 +20,29 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
+                        <form method="POST" action="<?= base_url('ItemoutController/list_of_fast_moving/') ?>">
+                        <div class="row justify-content">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select name="periode" id="periode" class="form-control select2" style="width: 100%;">
+                                            <option <?php if(($periode == NULL)||($periode == 'week')){echo 'selected';} ?> value="week">Last Week</option>
+                                            <option <?php if($periode == 'month'){echo 'selected';} ?> value="month">Last Month</option>
+                                            <option <?php if($periode == 'month_3'){echo 'selected';} ?>  value="month_3">Last 3 Month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-default">Show</button>
+                            </div>
+                        </div>  
+                        </form>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Item Code</th>
                                         <th>Item Name</th>
                                         <th>Total Item In</th>
-                                        <th>Total Transaction</th>
+                                        <th>Actual Stock</th>
                                         <th>SKU Number</th>
                                     </tr>
                                 </thead>
@@ -42,10 +53,9 @@
                                     ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $transaction->item_code ?></td>
-                                            <td><?= $transaction->sku_number ?></td>
+                                            <td><?= $transaction->item_name ?></td>
                                             <td><?= $transaction->total ?></td>
-                                            <td><?= $transaction->total_transaction ?></td>
+                                            <td><?= $transaction->stok ?></td>
                                             <td><?= $transaction->sku_number ?></td>
                                         </tr>
                                     <?php } ?>

@@ -25,8 +25,10 @@ class IteminController extends CI_Controller
     }
     public function list_of_slow_moving()
     {
+        $where = $this->input->post('periode');
+        $data['periode'] = $this->input->post('periode');
         $data['judul'] = 'List of Slow Moving';
-        $data['transactions']  = $this->item_ins->read_list_slow_moving();
+        $data['transactions']  = $this->item_ins->read_list_slow_moving($where);
         $this->load->view('template/header');
         $this->load->view('template/navbar');
         $this->load->view('item_in/slow_moving', $data);

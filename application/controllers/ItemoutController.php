@@ -35,8 +35,10 @@ class ItemoutController extends CI_Controller
     }
     public function list_of_fast_moving()
     {
+        $where = $this->input->post('periode');
+        $data['periode'] = $this->input->post('periode');
         $data['judul'] = 'List of Fast Moving';
-        $data['transactions']  = $this->item_outs->read_list_fast_moving();
+        $data['transactions']  = $this->item_outs->read_list_fast_moving($where);
         $this->load->view('template/header');
         $this->load->view('template/navbar');
         $this->load->view('item_out/fast_moving', $data);

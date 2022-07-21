@@ -45,8 +45,21 @@ class Item_ins extends CI_Model
         $this->db->order_by('t.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }
-    function read_list_slow_moving()
+    function read_list_slow_moving($periode = NULL)
     {
+        if(($periode == NULL) || ($periode == 'week')){
+            $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
+        }elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        }
+        elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        if (($periode != NULL)) {
+            $this->db->where('i.created_at >=', $startDate);
+            $this->db->where('i.created_at <=', $endDate);
+        }
         $this->db->select('*, sum(i.item_total) as total, count(i.item_total) as total_transaction ,s.item_name, s.item_code');
         $this->db->from('item_in_tb i');
         $this->db->join('items s', 's.id=i.item_id', 'left');
