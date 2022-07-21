@@ -33,7 +33,9 @@
                                         <th>Warehouse Name</th>
                                         <th>Transaction Date</th>
                                         <!-- <th>Status</th> -->
+                                        <?php if ($judul != 'List of Slow Moving') { ?>
                                         <th style="width: 20%;">Action</th>
+                                        <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +66,7 @@
                                                     <?php } ?>
                                                 </td>
                                             <?php } ?> -->
+                                            <?php if ($judul != 'List of Slow Moving') { ?>
                                             <td>
                                                 <div class="row">
                                                     <?php if ($this->session->userdata('role_id') != NULL) { ?>
@@ -73,6 +76,7 @@
                                                     <?php }  ?>
                                                 </div>
                                             </td>
+                                            <?php }  ?>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

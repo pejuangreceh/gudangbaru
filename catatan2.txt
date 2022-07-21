@@ -19,3 +19,9 @@ terus ini di transaksi order, kan tak klik submit tanpa klik add. nah itu gabisa
 order -> supplier + gudang
 item in -> supplier + gudang
 item out -> customer + gudang
+
+list of slow moving sama fast moving item nya?
+
+slow moving item itu list item mana aja se yg jarang dibeli
+
+nah kalo fast moving itu yg banyak di item out

@@ -33,6 +33,15 @@ class ItemoutController extends CI_Controller
         $this->load->view('item_out/index', $data);
         $this->load->view('template/footer');
     }
+    public function list_of_fast_moving()
+    {
+        $data['judul'] = 'List of Fast Moving';
+        $data['transactions']  = $this->item_outs->read_list_fast_moving();
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('item_out/fast_moving', $data);
+        $this->load->view('template/footer');
+    }
     public function detail($id, $transaction_code)
     {
         $data['judul'] = 'Item out Detail';

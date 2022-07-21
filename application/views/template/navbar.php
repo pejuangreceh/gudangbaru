@@ -189,6 +189,18 @@
                                         <p>List of Selling</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('IteminController/list_of_slow_moving') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List of Slow Moving</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('ItemoutController/list_of_fast_moving') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List of Fast Moving</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

@@ -45,6 +45,15 @@ class Item_ins extends CI_Model
         $this->db->order_by('t.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }
+    function read_list_slow_moving()
+    {
+        $this->db->select('*, sum(i.item_total) as total, count(i.item_total) as total_transaction ,s.item_name, s.item_code');
+        $this->db->from('item_in_tb i');
+        $this->db->join('items s', 's.id=i.item_id', 'left');
+        $this->db->group_by('i.item_id');
+        $this->db->order_by('total', 'ASC');
+        return $query = $this->db->get()->result();
+    }
     function read_transaksi_order($where = 'order', $where2 = 'accepted', $where3 = 'stok_in', $where4 = 'done')
     {
         $array = array('type' => $where, 'total_stok > ' => 0);

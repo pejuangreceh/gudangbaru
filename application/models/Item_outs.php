@@ -58,7 +58,15 @@ class Item_outs extends CI_Model
         return $query = $this->db->get()->result();
     }
 
-
+    function read_list_fast_moving()
+    {
+        $this->db->select('*, sum(i.item_total) as total, count(i.item_total) as total_transaction ,s.item_name, s.item_code');
+        $this->db->from('item_out_tb i');
+        $this->db->join('items s', 's.id=i.item_id', 'left');
+        $this->db->group_by('i.item_id');
+        $this->db->order_by('total', 'DESC');
+        return $query = $this->db->get()->result();
+    }
 
 
     function get($where = '')

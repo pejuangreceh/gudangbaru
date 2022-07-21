@@ -23,6 +23,15 @@ class IteminController extends CI_Controller
         $this->load->view('item_in/index', $data);
         $this->load->view('template/footer');
     }
+    public function list_of_slow_moving()
+    {
+        $data['judul'] = 'List of Slow Moving';
+        $data['transactions']  = $this->item_ins->read_list_slow_moving();
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('item_in/slow_moving', $data);
+        $this->load->view('template/footer');
+    }
     public function detail($id, $transaction_code)
     {
         $data['judul'] = 'Item in Detail';
