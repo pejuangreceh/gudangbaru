@@ -50,9 +50,10 @@ class Dashboards extends CI_Model
         $this->db->where('o.status','accepted');
         $this->db->where('o.created_at >=', $startDate);
         $this->db->where('o.created_at <=', $endDate);
-        $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, i.stok,i.newest_lead_time,avg(n.lead_time) as avg_lead_time, max(n.lead_time) as max_lead_time');
+        $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,avg(n.lead_time) as avg_lead_time, max(n.lead_time) as max_lead_time');
         $this->db->from('item_out_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
+        $this->db->join('units u', 'u.id=i.unit_id', 'left');
         $this->db->join('item_in_tb n', 'n.item_id=o.item_id', 'left');
         $this->db->order_by('total', 'DESC');
         // $this->db->group_by('o.item_id');

@@ -41,13 +41,14 @@
                                         <th>No</th>
                                         <!-- <th>Item ID</th> -->
                                         <th>Item Name</th>
-                                        <th>Total Sold</th>
+                                        <!-- <th>Total Sold</th> -->
                                         <!-- <th>Total Transaction</th> -->
-                                        <th>Highest Sold</th>
+                                        <!-- <th>Highest Sold</th> -->
+                                        <th>Satuan</th>
                                         <th>Average Sold</th>
                                         <th>Total Stok</th>
                                         <th>Latest Lead Time</th>
-                                        <th>Avg Lead Time</th>
+                                        <!-- <th>Avg Lead Time</th> -->
                                         <th>Max Lead Time</th>
                                         <th>Lead Time Demand</th>
                                         <th>Safe Stock</th>
@@ -67,17 +68,20 @@
                                             <td><?= $no++ ?></td>
                                             <!-- <td><?= $out->item_id ?></td> -->
                                             <td><?= $out->item_name ?></td>
-                                            <td><?= $out->total ?></td>
+                                            <!-- <td><?= $out->total ?></td> -->
                                             <!-- <td><?= $out->transaction ?></td> -->
-                                            <td><?= $out->highest ?></td>
+                                            <!-- <td><?= $out->highest ?></td> -->
+                                            <td><?= $out->unit_name ?></td>
                                             <td><?= number_format((float)$out->avg, 2, '.', '') ?></td>
                                             <td><?= $out->stok ?></td>
-                                            <td><?= $out->newest_lead_time ?></td>
-                                            <td><?= number_format((float)$out->avg_lead_time, 2, '.', '') ?></td>
-                                            <td><?= $out->max_lead_time ?></td>
+                                            <td><?= $out->newest_lead_time ?> hari</td>
+                                            <!-- <td><?= number_format((float)$out->avg_lead_time, 2, '.', '') ?></td> -->
+                                            <td><?= $out->max_lead_time ?> hari</td>
                                             <td><input readonly name="ltd[]" id="ltd<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= str_replace(',', '.',number_format((float)$LTD, 2, '.', '')) ?>"></td>
-                                            <td><input onchange="updatePrice()" name="safe_stock[]" id="safe_stock<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= str_replace(',', '.',number_format((float)$safe_stock, 2, '.', '')) ?>"></td>
-                                            <td><input readonly name="rop[]" id="rop<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= number_format((float)$ROP, 2, '.', '') ?>"></td>
+                                            <!-- <td><input onchange="updatePrice()" name="safe_stock[]" id="safe_stock<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= str_replace(',', '.',number_format((float)$safe_stock, 2, '.', '')) ?>"></td> -->
+                                            <td><input onchange="updatePrice()" name="safe_stock[]" id="safe_stock<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= ceil($safe_stock) ?>"></td>
+                                            <!-- <td><input readonly name="rop[]" id="rop<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= number_format((float)$ROP, 2, '.', '') ?>"></td> -->
+                                            <td><input readonly name="rop[]" id="rop<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= ceil($ROP) ?>"></td>
                                         </tr>
                                     <?php
                                     }
@@ -116,7 +120,8 @@
         let rop = []
         for (let i = 0; i < count - 1; i++) {
             rop[i] = document.querySelector('#rop' + i);
-            rop[i].value = parseFloat((document.getElementById("safe_stock" + i).value.replace(",", "."))) + parseFloat((document.getElementById("ltd" + i).value.replace(",", ".")));
+            // rop[i].value = parseFloat((document.getElementById("safe_stock" + i).value.replace(",", "."))) + parseFloat((document.getElementById("ltd" + i).value.replace(",", ".")));
+            rop[i].value = parseInt(parseFloat((document.getElementById("safe_stock" + i).value.replace(",", "."))) + parseFloat((document.getElementById("ltd" + i).value.replace(",", "."))));
         }
     }
 </script>
