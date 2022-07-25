@@ -44,7 +44,7 @@
                                         <!-- <th>Total Sold</th> -->
                                         <!-- <th>Total Transaction</th> -->
                                         <!-- <th>Highest Sold</th> -->
-                                        <th>Satuan</th>
+                                        <th>Unit</th>
                                         <th>Average Sold</th>
                                         <th>Total Stok</th>
                                         <th>Latest Lead Time</th>

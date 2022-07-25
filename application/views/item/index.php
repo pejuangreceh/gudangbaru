@@ -31,7 +31,7 @@
                                         <th>Item Name</th>
                                         <th>Category</th>
                                         <th>Unit</th>
-                                        <th>Stok</th>
+                                        <!-- <th>Stok</th> -->
                                         <th>Buying Price</th>
                                         <th>Selling Price</th>
                                         <?php if ($judul != 'List of Stock') { ?>
@@ -50,7 +50,7 @@
                                             <td><?= $item->item_name ?></td>
                                             <td><?= $item->category_name ?></td>
                                             <td><?= $item->unit_name ?></td>
-                                            <td><?= $item->stok ?></td>
+                                            <!-- <td><?= $item->stok ?></td> -->
                                             <td><?= $item->buying_price ?></td>
                                             <td><?= $item->selling_price ?></td>
                                             <?php if ($judul != 'List of Stock') { ?>
