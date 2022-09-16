@@ -37,17 +37,16 @@ class Dashboards extends CI_Model
     }
     function read_item_out_2($periode = NULL)
     {
-        if(($periode == NULL) || ($periode == 'week')){
+        if (($periode == NULL) || ($periode == 'week')) {
             $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
-        }elseif ($periode == 'month') {
+        } elseif ($periode == 'month') {
             $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
-        }
-        elseif ($periode == 'month_3') {
+        } elseif ($periode == 'month_3') {
             $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
         }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
         // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
-        $this->db->where('o.status','accepted');
+        $this->db->where('o.status', 'accepted');
         $this->db->where('o.created_at >=', $startDate);
         $this->db->where('o.created_at <=', $endDate);
         $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,avg(n.lead_time) as avg_lead_time, max(n.lead_time) as max_lead_time');
@@ -55,6 +54,54 @@ class Dashboards extends CI_Model
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('units u', 'u.id=i.unit_id', 'left');
         $this->db->join('item_in_tb n', 'n.item_id=o.item_id', 'left');
+        $this->db->order_by('total', 'DESC');
+        // $this->db->group_by('o.item_id');
+        $this->db->group_by(array('o.item_id'));
+        return $query = $this->db->get()->result();
+    }
+    function read_item_out_fix($periode = NULL)
+    {
+        if (($periode == NULL) || ($periode == 'week')) {
+            $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
+        } elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        } elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
+        $this->db->where('o.status', 'accepted');
+        $this->db->where('o.created_at >=', $startDate);
+        $this->db->where('o.created_at <=', $endDate);
+        $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,n.max_lead_time,n.avg_lead_time');
+        $this->db->from('item_out_tb o');
+        $this->db->join('items i', 'i.id=o.item_id', 'left');
+        $this->db->join('units u', 'u.id=i.unit_id', 'left');
+        $this->db->join('(SELECT item_id, avg(lead_time) as avg_lead_time, max(lead_time) as max_lead_time FROM item_in_tb WHERE lead_time != 0) as n', 'n.item_id=o.item_id', 'left');
+        $this->db->order_by('total', 'DESC');
+        // $this->db->group_by('o.item_id');
+        $this->db->group_by(array('o.item_id'));
+        return $query = $this->db->get()->result();
+    }
+    function read_item_out_new($periode = NULL)
+    {
+        if (($periode == NULL) || ($periode == 'week')) {
+            $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
+        } elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        } elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
+        $this->db->where('o.status', 'accepted');
+        // $this->db->where('o.created_at >=', $startDate);
+        // $this->db->where('o.created_at <=', $endDate);
+        $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, u.unit_name, i.item_name, i.stok,i.newest_lead_time');
+        $this->db->from('item_out_tb o');
+        $this->db->join('items i', 'i.id=o.item_id', 'left');
+        $this->db->join('units u', 'u.id=i.unit_id', 'left');
+        // $this->db->join('item_in_tb n', 'n.item_id=o.item_id', 'left');
         $this->db->order_by('total', 'DESC');
         // $this->db->group_by('o.item_id');
         $this->db->group_by(array('o.item_id'));

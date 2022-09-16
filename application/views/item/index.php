@@ -9,7 +9,7 @@
                 </div>
                 <?php if ($judul != 'List of Stock') { ?>
                     <div class="col-sm-1">
-                    <a href="<?= base_url('ItemController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
+                        <a href="<?= base_url('ItemController/add') ?>"><button type="button" class="btn btn-block btn-primary">Add</button></a>
                     </div>
                 <?php } ?>
             </div>
@@ -28,10 +28,18 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>ID</th>
                                         <th>Item Name</th>
                                         <th>Category</th>
                                         <th>Unit</th>
-                                        <!-- <th>Stok</th> -->
+                                        <?php if ($judul == 'List of Stock') { ?>
+                                            <th>Stok</th>
+                                            <th>Highest</th>
+                                            <th>Max Lead</th>
+                                            <th>Avg</th>
+                                            <th>AvgLead</th>
+                                            <th>Safety Stok</th>
+                                        <?php } ?>
                                         <th>Buying Price</th>
                                         <th>Selling Price</th>
                                         <?php if ($judul != 'List of Stock') { ?>
@@ -44,28 +52,47 @@
                                     <?php
                                     $no = 1;
                                     foreach ($items as $item) {
+                                        $safe_stock = ($item->highest * $item->max_lead_time) - ($item->avg * $item->avg_lead_time);
+                                        if (($item->stok <= (0.2 * $safe_stock)) || ($item->stok > (1.8 * $safe_stock))) {
+                                            // merah
+                                            $warna = 'style="background-color:#d40f0f; color:white;"';
+                                        } elseif ((($item->stok > (0.2 * $safe_stock)) && ($item->stok < (0.8 * $safe_stock))) || (($item->stok > (1.2 * $safe_stock)) && ($item->stok <= (1.8 * $safe_stock)))) {
+                                            // kuning
+                                            $warna = 'style="background-color:#f2f547; color:black;"';
+                                        } else {
+                                            $warna = 'style="background-color:#49f56c; color:black;"';
+                                        }
+
                                     ?>
-                                        <tr>
+                                        <tr <?= $warna ?>>
                                             <td><?= $no++ ?></td>
+                                            <td><?= $item->id ?></td>
                                             <td><?= $item->item_name ?></td>
                                             <td><?= $item->category_name ?></td>
                                             <td><?= $item->unit_name ?></td>
-                                            <!-- <td><?= $item->stok ?></td> -->
+                                            <?php if ($judul == 'List of Stock') { ?>
+                                                <td><?= $item->stok ?></td>
+                                                <td><?= $item->highest ?></td>
+                                                <td><?= $item->max_lead_time ?></td>
+                                                <td><?= $item->avg ?></td>
+                                                <td><?= $item->avg_lead_time ?></td>
+                                                <td><?= ceil($safe_stock) ?></td>
+                                            <?php } ?>
                                             <td><?= $item->buying_price ?></td>
                                             <td><?= $item->selling_price ?></td>
                                             <?php if ($judul != 'List of Stock') { ?>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <a href="<?= base_url('ItemController/edit/' . $item->id) ?>"><button type="button" class="btn btn-block btn-info">Edit</button></a>
-                                                    </div>
-                                                    <?php if (($item->stok == 0) && ($item->used == FALSE)) { ?>
+                                                <td>
+                                                    <div class="row">
                                                         <div class="col-sm-6">
-                                                            <a onclick="return confirm('Hapus Data?')" href="<?= base_url('ItemController/delete/' . $item->id) ?>"><button type="button" class="btn btn-block btn-danger">Delete</button></a>
+                                                            <a href="<?= base_url('ItemController/edit/' . $item->id) ?>"><button type="button" class="btn btn-block btn-info">Edit</button></a>
                                                         </div>
-                                                    <?php } ?>
-                                                </div>
-                                            </td>
+                                                        <?php if (($item->stok == 0) && ($item->used == FALSE)) { ?>
+                                                            <div class="col-sm-6">
+                                                                <a onclick="return confirm('Hapus Data?')" href="<?= base_url('ItemController/delete/' . $item->id) ?>"><button type="button" class="btn btn-block btn-danger">Delete</button></a>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                </td>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>

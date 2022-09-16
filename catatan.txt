@@ -24,3 +24,6 @@ let idtotal = '#total_price' + count;
 
 
 max item buat item out belum di setting bes
+
+
+

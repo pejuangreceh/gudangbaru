@@ -22,7 +22,7 @@ class DashboardController extends CI_Controller
         $data['periode'] = $this->input->post('periode');
         $data['judul'] = 'Reorder Point ';
         $data['item_outs']  = $this->dashboards->read_item_out();
-        $data['item_outs_2']  = $this->dashboards->read_item_out_2($where);
+        $data['item_outs_2']  = $this->dashboards->read_item_out_fix($where);
         $this->load->view('template/header');
         $this->load->view('template/navbar');
         $this->load->view('dashboard/index', $data);

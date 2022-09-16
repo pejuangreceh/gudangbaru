@@ -1,0 +1,31 @@
+tambahkan actual stock dan safety stock di 'List Of Stock'
+hijau = aman
+kuning =  
+merah = actual_stock terlalu banyak / terlalu sedikit ---- kurang dari (80%safety_stock)->30_hari_terakhir atau lebih dari (180%safety_stock)
+
+
+100
+
+0-20 = merah
+21-79 = kuning
+80 - 120 = hijau
+121 - 180 = kuning
+181++ = merah 
+
+fix_new
+SELECT o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, i.stok,i.newest_lead_time FROM item_out_tb o  LEFT JOIN items i ON i.id=o.item_id LEFT JOIN item_in_tb n ON n.item_id=o.item_id WHERE 1
+
+fix
+SELECT o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,avg(n.lead_time) as avg_lead_time, max(n.lead_time) as max_lead_time FROM item_out_tb o LEFT JOIN items i ON i.id=o.item_id LEFT JOIN units u ON u.id=i.unit_id LEFT JOIN item_in_tb n ON n.item_id=o.item_id WHERE 1
+
+no rumus
+SELECT DISTINCT o.id,i.id,u.id,o.item_id, i.item_name, u.unit_name, i.stok,i.newest_lead_time FROM item_out_tb o LEFT JOIN items i ON i.id=o.item_id LEFT JOIN units u ON u.id=i.unit_id LEFT JOIN item_in_tb n ON n.item_id=o.item_id WHERE 1
+
+
+
+fixxxxx banget
+SELECT o.id as out_id ,i.id as in_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest,u.id as unit_id ,o.item_id, i.item_name, u.unit_name, i.stok,i.newest_lead_time,n.max_lead_time,n.avg_lead_time FROM item_out_tb o LEFT JOIN items i ON i.id=o.item_id LEFT JOIN units u ON u.id=i.unit_id LEFT JOIN 
+(SELECT item_id, avg(lead_time) as avg_lead_time, max(lead_time) as max_lead_time FROM item_in_tb WHERE lead_time != 0) as n ON n.item_id=o.item_id
+WHERE 1
+
+SELECT count(item_total) as transaction, avg(item_total) as avg, max(item_total) as highest FROM `item_out_tb` WHERE created_at >= 17-08-2022 OR created_at <= 16-09-2022 
