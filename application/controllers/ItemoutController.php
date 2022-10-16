@@ -44,6 +44,17 @@ class ItemoutController extends CI_Controller
         $this->load->view('item_out/fast_moving', $data);
         $this->load->view('template/footer');
     }
+    public function list_of_slow_moving()
+    {
+        $where = $this->input->post('periode');
+        $data['periode'] = $this->input->post('periode');
+        $data['judul'] = 'List of Slow Moving';
+        $data['transactions']  = $this->item_outs->read_list_slow_moving($where);
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('item_out/slow_moving', $data);
+        $this->load->view('template/footer');
+    }
     public function detail($id, $transaction_code)
     {
         $data['judul'] = 'Item out Detail';
@@ -102,6 +113,7 @@ class ItemoutController extends CI_Controller
         // pengecekkan input
         if (isset($_POST['item_id'])) {
             for ($i = 0; $i < count($_POST['total_price']); $i++) {
+                $out_date = new DateTime($_POST['out_date'][$i]);
                 $result = array(
                     'transaction_code' => $transaction_code,
                     'item_id' => $_POST['item_id'][$i],
@@ -111,6 +123,7 @@ class ItemoutController extends CI_Controller
                     'selling_price' => $_POST['selling_price'][$i],
                     'total_price' => $_POST['total_price'][$i],
                     'status' => 'pending',
+                    'out_date' => $_POST['out_date'][$i],
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 );

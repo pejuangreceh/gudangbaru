@@ -52,19 +52,21 @@
                                     <?php
                                     $no = 1;
                                     foreach ($items as $item) {
-                                        $safe_stock = ($item->highest * $item->max_lead_time) - ($item->avg * $item->avg_lead_time);
-                                        if (($item->stok <= (0.2 * $safe_stock)) || ($item->stok > (1.8 * $safe_stock))) {
-                                            // merah
-                                            $warna = 'style="background-color:#d40f0f; color:white;"';
-                                        } elseif ((($item->stok > (0.2 * $safe_stock)) && ($item->stok < (0.8 * $safe_stock))) || (($item->stok > (1.2 * $safe_stock)) && ($item->stok <= (1.8 * $safe_stock)))) {
-                                            // kuning
-                                            $warna = 'style="background-color:#f2f547; color:black;"';
-                                        } else {
-                                            $warna = 'style="background-color:#49f56c; color:black;"';
+                                        if ($judul == 'List of Stock') {
+                                            $safe_stock = ($item->highest * $item->max_lead_time) - ($item->avg * $item->avg_lead_time);
+                                            if (($item->stok <= (0.2 * $safe_stock)) || ($item->stok > (1.8 * $safe_stock))) {
+                                                // merah
+                                                $warna = 'style="background-color:#d40f0f; color:white;"';
+                                            } elseif ((($item->stok > (0.2 * $safe_stock)) && ($item->stok < (0.8 * $safe_stock))) || (($item->stok > (1.2 * $safe_stock)) && ($item->stok <= (1.8 * $safe_stock)))) {
+                                                // kuning
+                                                $warna = 'style="background-color:#f2f547; color:black;"';
+                                            } else {
+                                                $warna = 'style="background-color:#49f56c; color:black;"';
+                                            }
                                         }
 
                                     ?>
-                                        <tr <?= $warna ?>>
+                                        <tr <?php echo ($judul == 'List of Stock') ? $warna : ''; ?>>
                                             <td><?= $no++ ?></td>
                                             <td><?= $item->id ?></td>
                                             <td><?= $item->item_name ?></td>

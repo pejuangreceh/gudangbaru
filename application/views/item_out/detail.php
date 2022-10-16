@@ -32,6 +32,7 @@
                                         <th>Total Price</th>
                                         <th>Customer Name</th>
                                         <th>Warehouse Name</th>
+                                        <th>Item Out Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,11 +50,13 @@
                                             <td><?= $out->total_price ?></td>
                                             <td><?= $out->customer_name ?></td>
                                             <td><?= $out->warehouse_name ?></td>
+                                            <td><?= date_format(date_create($out->out_date), "Y-m-d") ?></td>
                                         </tr>
                                     <?php } ?>
                                     <tr>
                                         <td colspan="3">SUBTOTAL</td>
                                         <td><?= number_format($subtotal, 2); ?></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                     </tr>

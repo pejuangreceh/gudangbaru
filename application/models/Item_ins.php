@@ -20,7 +20,7 @@ class Item_ins extends CI_Model
     function read_item_in($where)
     {
         $this->db->where('transaction_code', $where);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, i.item_name, s.supplier_name, w.warehouse_name ');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.in_date, i.item_name, s.supplier_name, w.warehouse_name ');
         $this->db->from('item_in_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('suppliers s', 's.id=o.supplier_id', 'left');
@@ -47,12 +47,11 @@ class Item_ins extends CI_Model
     }
     function read_list_slow_moving($periode = NULL)
     {
-        if(($periode == NULL) || ($periode == 'week')){
+        if (($periode == NULL) || ($periode == 'week')) {
             $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
-        }elseif ($periode == 'month') {
+        } elseif ($periode == 'month') {
             $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
-        }
-        elseif ($periode == 'month_3') {
+        } elseif ($periode == 'month_3') {
             $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
         }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));

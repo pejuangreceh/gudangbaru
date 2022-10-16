@@ -96,6 +96,7 @@
                                                                 <th>Total Price</th>
                                                                 <th>Supplier Name</th>
                                                                 <th>Order Date</th>
+                                                                <th>Item In Date</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -113,7 +114,8 @@
                                                                     <td><input required readonly id="total_price<?php echo $no - 2; ?>" onchange="updatePrice()" name="total_price[]" class="form-control" type="number" value="<?= $order->sisa_stok * $order->buying_price    ?>"></td>
                                                                     <input hidden required readonly name="supplier_id" class="form-control" type="text" value="<?= $order->supplier_id ?>">
                                                                     <td><input required readonly name="supplier_name[]" class="form-control" type="text" value="<?= $order->supplier_name ?>"></td>
-                                                                    <td><input required name="order_date[]" class="form-control" type="text" value="<?= $order->created_at ?>"></td>
+                                                                    <td><input required readonly name="order_date[]" class="form-control" type="text" value="<?= $order->order_date ?>"></td>
+                                                                    <td><input required name="in_date[]" class="form-control" type="date"></td>
                                                                 </tr>
                                                             <?php } ?>
 

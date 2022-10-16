@@ -84,6 +84,7 @@ class OrderController extends CI_Controller
                     'total_price' => $_POST['total_price'][$i],
                     'status' => 'pending',
                     'sisa_stok' => $_POST['item_total'][$i],
+                    'order_date' => $_POST['order_date'][$i],
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 );

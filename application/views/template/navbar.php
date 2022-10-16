@@ -183,14 +183,9 @@
                                         <p>List of Stock</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="<?= base_url('ItemoutController/list_of_selling') ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>List of Selling</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('IteminController/list_of_slow_moving') ?>" class="nav-link">
+                                    <a href="<?= base_url('ItemoutController/list_of_slow_moving') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>List of Slow Moving</p>
                                     </a>

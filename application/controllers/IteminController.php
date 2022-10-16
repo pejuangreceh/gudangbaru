@@ -91,6 +91,7 @@ class IteminController extends CI_Controller
         if (isset($_POST['parent_code'])) {
             for ($i = 0; $i < count($_POST['total_price']); $i++) {
                 $order_date = new DateTime($_POST['order_date'][$i]);
+                $in_date = new DateTime($_POST['in_date'][$i]);
                 $now = new DateTime();
                 $result = array(
                     'transaction_code' => $transaction_code,
@@ -101,13 +102,14 @@ class IteminController extends CI_Controller
                     'item_total' => $_POST['sisa_stok'][$i],
                     'total_price' => $_POST['total_price'][$i],
                     'parent_code' => $parent_code,
+                    'in_date' => $_POST['in_date'][$i],
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                     'lead_time' => date_diff($order_date, $now)->days
                 );
                 $this->db->insert('item_in_tb', $result);
                 $result_item = array(
-                    'newest_lead_time' => date_diff($order_date, $now)->days,
+                    'newest_lead_time' => date_diff($order_date, $in_date)->days,
                     'newest_order_id' => $_POST['order_id'][$i],
                 );
                 $this->item_ins->update_item($result_item, $_POST['item_id'][$i],);

@@ -21,7 +21,7 @@ class Item_outs extends CI_Model
     function read_item_out($where)
     {
         $this->db->where('transaction_code', $where);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.warehouse_id, o.item_total, o.total_price, o.status, i.item_name, w.warehouse_name, c.customer_name');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.warehouse_id, o.item_total, o.total_price, o.status, o.out_date, i.item_name, w.warehouse_name, c.customer_name');
         $this->db->from('item_out_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('warehouses w', 'w.id=o.warehouse_id', 'left');
@@ -60,12 +60,11 @@ class Item_outs extends CI_Model
 
     function read_list_fast_moving($periode = NULL)
     {
-        if(($periode == NULL) || ($periode == 'week')){
+        if (($periode == NULL) || ($periode == 'week')) {
             $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
-        }elseif ($periode == 'month') {
+        } elseif ($periode == 'month') {
             $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
-        }
-        elseif ($periode == 'month_3') {
+        } elseif ($periode == 'month_3') {
             $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
         }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
@@ -78,6 +77,27 @@ class Item_outs extends CI_Model
         $this->db->join('items s', 's.id=i.item_id', 'left');
         $this->db->group_by('i.item_id');
         $this->db->order_by('total', 'DESC');
+        return $query = $this->db->get()->result();
+    }
+    function read_list_slow_moving($periode = NULL)
+    {
+        if (($periode == NULL) || ($periode == 'week')) {
+            $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
+        } elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        } elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        if (($periode != NULL)) {
+            $this->db->where('i.created_at >=', $startDate);
+            $this->db->where('i.created_at <=', $endDate);
+        }
+        $this->db->select('*, sum(i.item_total) as total, count(i.item_total) as total_transaction ,s.item_name, s.item_code');
+        $this->db->from('item_out_tb i');
+        $this->db->join('items s', 's.id=i.item_id', 'left');
+        $this->db->group_by('i.item_id');
+        $this->db->order_by('total', 'ASC');
         return $query = $this->db->get()->result();
     }
 

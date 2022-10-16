@@ -32,7 +32,7 @@
                                         <th>Total Price</th>
                                         <th>Supplier Name</th>
                                         <th>Warehouse Name</th>
-
+                                        <th>Item In Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,12 +50,14 @@
                                             <td><?= $order->total_price ?></td>
                                             <td><?= $order->supplier_name ?></td>
                                             <td><?= $order->warehouse_name ?></td>
+                                            <td><?= date_format(date_create($order->in_date), "Y-m-d") ?></td>
                                         </tr>
                                     <?php } ?>
                                     <tr>
                                         <td colspan="3">SUBTOTAL</td>
 
                                         <td><?= number_format($subtotal, 2); ?></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                     </tr>

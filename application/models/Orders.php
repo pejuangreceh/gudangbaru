@@ -10,7 +10,7 @@ class Orders extends CI_Model
     function read($where)
     {
         $this->db->where('transaction_code', $where);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.status, o.sisa_stok, i.item_name, s.supplier_name ');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.order_date, o.status, o.sisa_stok, i.item_name, s.supplier_name ');
         $this->db->from('order_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('suppliers s', 's.id=o.supplier_id', 'left');
