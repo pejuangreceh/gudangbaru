@@ -146,16 +146,16 @@ class Item_outs extends CI_Model
     }
 
 
-    function get($where = '')
-    {
-        $query = $this->db->query('select * from item_out_tb ' . $where . ' ORDER BY id DESC');
-        return $query->result_array();
-    }
-    function update($data, $where)
-    {
-        $this->db->where('transaction_code', $where);
-        return $this->db->update('transactions', $data);
-    }
+    // function get($where = '')
+    // {
+    //     $query = $this->db->query('select * from item_out_tb ' . $where . ' ORDER BY id DESC');
+    //     return $query->result_array();
+    // }
+    // function update($data, $where)
+    // {
+    //     $this->db->where('transaction_code', $where);
+    //     return $this->db->update('transactions', $data);
+    // }
     // function delete($where, $code)
     // {
     //     $this->db->where('id', $where);

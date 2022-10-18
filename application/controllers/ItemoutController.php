@@ -229,22 +229,6 @@ class ItemoutController extends CI_Controller
         redirect(base_url('itemoutController'));
     }
 
-    public function update($id)
-    {
-        $data = array(
-            'id' => $id,
-            'sku_number' => $this->input->post('sku_number'),
-            'item_code' => $this->input->post('item_code'),
-            'item_name' => $this->input->post('item_name'),
-            'item_category_id' => $this->input->post('item_category_id'),
-            'unit_id' => $this->input->post('unit_id'),
-            'selling_price' => $this->input->post('selling_price'),
-            'buying_price' => $this->input->post('buying_price'),
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-        $query = $this->item_outs->update($data, $id);
-        redirect(base_url('ItemoutController'));
-    }
     // public function delete($id, $code)
     // {
     //     $query = $this->item_outs->delete($id, $code);

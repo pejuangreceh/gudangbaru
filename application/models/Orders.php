@@ -36,32 +36,21 @@ class Orders extends CI_Model
         return $query = $this->db->get()->result();
     }
 
-    function get($where = '')
-    {
-        $query = $this->db->query('select * from order_tb ' . $where . ' ORDER BY id DESC');
-        return $query->result_array();
-    }
-    // function update($data, $where)
+    // function get($where = '')
     // {
-    //     $this->db->where('id', $where);
-    //     return $this->db->update('order_tb', $data);
+    //     $query = $this->db->query('select * from order_tb ' . $where . ' ORDER BY id DESC');
+    //     return $query->result_array();
     // }
-    // function delete($where, $code)
+
+    // function cek_transaksi($where)
     // {
-    //     $this->db->where('id', $where);
-    //     return $this->db->delete('order_tb');
-    //     // pengecekkan row pada tabel order
-    //     cek_transaksi($code);
+    //     $query = $this->db->query('SELECT * FROM order_tb WHERE transaction_code = "' . $where . '"');
+    //     $cek = $query->num_rows();
+    //     if ($cek < 1) {
+    //         $this->db->where('transaction_code', $where);
+    //         return $this->db->delete('transactions');
+    //     }
     // }
-    function cek_transaksi($where)
-    {
-        $query = $this->db->query('SELECT * FROM order_tb WHERE transaction_code = "' . $where . '"');
-        $cek = $query->num_rows();
-        if ($cek < 1) {
-            $this->db->where('transaction_code', $where);
-            return $this->db->delete('transactions');
-        }
-    }
     function reject($data, $where)
     {
         $this->db->where('id', $where);

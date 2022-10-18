@@ -23,17 +23,7 @@ class IteminController extends CI_Controller
         $this->load->view('item_in/index', $data);
         $this->load->view('template/footer');
     }
-    public function list_of_slow_moving()
-    {
-        $where = $this->input->post('periode');
-        $data['periode'] = $this->input->post('periode');
-        $data['judul'] = 'List of Slow Moving';
-        $data['transactions']  = $this->item_ins->read_list_slow_moving($where);
-        $this->load->view('template/header');
-        $this->load->view('template/navbar');
-        $this->load->view('item_in/slow_moving', $data);
-        $this->load->view('template/footer');
-    }
+
     public function detail($id, $transaction_code)
     {
         $data['judul'] = 'Item in Detail';
@@ -186,22 +176,7 @@ class IteminController extends CI_Controller
         redirect(base_url('itemController'));
     }
 
-    public function update($id)
-    {
-        $data = array(
-            'id' => $id,
-            'sku_number' => $this->input->post('sku_number'),
-            'item_code' => $this->input->post('item_code'),
-            'item_name' => $this->input->post('item_name'),
-            'item_category_id' => $this->input->post('item_category_id'),
-            'unit_id' => $this->input->post('unit_id'),
-            'selling_price' => $this->input->post('selling_price'),
-            'buying_price' => $this->input->post('buying_price'),
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-        $query = $this->item_ins->update($data, $id);
-        redirect(base_url('itemController'));
-    }
+
     // public function delete($id, $code)
     // {
     //     $query = $this->item_ins->delete($id, $code);
