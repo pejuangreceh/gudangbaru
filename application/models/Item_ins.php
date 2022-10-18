@@ -38,10 +38,12 @@ class Item_ins extends CI_Model
     function read_transaksi($where = 'in')
     {
         $this->db->where('type', $where);
-        $this->db->select('t.id, t.transaction_code, t.supplier_id, t.status, s.supplier_name, w.warehouse_name, t.created_at');
+        $this->db->select('t.id, t.transaction_code, t.supplier_id, t.status, s.supplier_name, w.warehouse_name, t.created_at,i.in_date');
         $this->db->from('transactions t');
         $this->db->join('suppliers s', 's.id=t.supplier_id', 'left');
         $this->db->join('warehouses w', 'w.id=t.warehouse_id', 'left');
+        $this->db->join('item_in_tb i', 'i.transaction_code=t.transaction_code', 'left');
+        $this->db->group_by('i.transaction_code');
         $this->db->order_by('t.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }

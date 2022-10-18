@@ -46,7 +46,7 @@
                                             <td><?= $no++ ?></td>
                                             <td><?= $transaction->transaction_code ?></td>
                                             <td><?= $transaction->supplier_name ?></td>
-                                            <td><?= $transaction->created_at ?></td>
+                                            <td><?= $transaction->order_date ?></td>
                                             <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
                                                 <td>
                                                     <?php if ($transaction->status == 'pending') { ?>

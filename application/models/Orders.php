@@ -27,9 +27,11 @@ class Orders extends CI_Model
     function read_transaksi($where = 'order')
     {
         $this->db->where('type', $where);
-        $this->db->select('t.id, t.transaction_code, t.supplier_id, t.status, s.supplier_name, t.created_at');
+        $this->db->select('t.id, t.transaction_code, t.supplier_id, t.status, s.supplier_name, t.created_at,o.order_date');
         $this->db->from('transactions t');
         $this->db->join('suppliers s', 's.id=t.supplier_id', 'left');
+        $this->db->join('order_tb o', 'o.transaction_code=t.transaction_code', 'left');
+        $this->db->group_by('o.transaction_code');
         $this->db->order_by('t.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }

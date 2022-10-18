@@ -34,7 +34,7 @@
                                         <th>Transaction Date</th>
                                         <!-- <th>Status</th> -->
                                         <?php if ($judul != 'List of Slow Moving') { ?>
-                                        <th style="width: 20%;">Action</th>
+                                            <th style="width: 20%;">Action</th>
                                         <?php } ?>
                                     </tr>
                                 </thead>
@@ -48,7 +48,7 @@
                                             <td><?= $transaction->transaction_code ?></td>
                                             <td><?= $transaction->supplier_name ?></td>
                                             <td><?= $transaction->warehouse_name ?></td>
-                                            <td><?= $transaction->created_at ?></td>
+                                            <td><?= $transaction->in_date ?></td>
                                             <!-- <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
                                                 <td>
                                                     <?php if ($transaction->status == 'pending') { ?>
@@ -67,15 +67,15 @@
                                                 </td>
                                             <?php } ?> -->
                                             <?php if ($judul != 'List of Slow Moving') { ?>
-                                            <td>
-                                                <div class="row">
-                                                    <?php if ($this->session->userdata('role_id') != NULL) { ?>
-                                                        <div class="col-sm-12">
-                                                            <a href="<?= base_url('IteminController/detail/' . $transaction->id . '/' . $transaction->transaction_code) ?>"><button type="button" class="btn btn-block btn-default">Detail</button></a>
-                                                        </div>
-                                                    <?php }  ?>
-                                                </div>
-                                            </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <?php if ($this->session->userdata('role_id') != NULL) { ?>
+                                                            <div class="col-sm-12">
+                                                                <a href="<?= base_url('IteminController/detail/' . $transaction->id . '/' . $transaction->transaction_code) ?>"><button type="button" class="btn btn-block btn-default">Detail</button></a>
+                                                            </div>
+                                                        <?php }  ?>
+                                                    </div>
+                                                </td>
                                             <?php }  ?>
                                         </tr>
                                     <?php } ?>

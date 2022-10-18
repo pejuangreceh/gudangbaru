@@ -50,7 +50,7 @@
                                             <td><?= $transaction->transaction_code ?></td>
                                             <td><?= $transaction->customer_name ?></td>
                                             <td><?= $transaction->warehouse_name ?></td>
-                                            <td><?= $transaction->created_at ?></td>
+                                            <td><?= $transaction->out_date ?></td>
                                             <!-- <?php if ($this->session->userdata('role_id') != 'gudang') { ?>
                                                 <td>
                                                     <?php if ($transaction->status == 'pending') { ?>

@@ -10,7 +10,7 @@ class Item_outs extends CI_Model
     function read($where)
     {
         $this->db->where('transaction_code', $where);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.warehouse_id, o.item_total, o.total_price, o.status, i.item_name, s.warehouse_name, c.customer_name, i.buying_price ');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.warehouse_id, o.item_total, o.total_price, o.status,o.out_date, i.item_name, s.warehouse_name, c.customer_name, i.buying_price ');
         $this->db->from('item_out_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('warehouses s', 's.id=o.warehouse_id', 'left');
@@ -40,10 +40,12 @@ class Item_outs extends CI_Model
     function read_transaksi($where = 'out')
     {
         $this->db->where('type', $where);
-        $this->db->select('t.id, t.transaction_code, t.warehouse_id, t.status, w.warehouse_name, c.customer_name, t.created_at');
+        $this->db->select('t.id, t.transaction_code, t.warehouse_id, t.status, w.warehouse_name, c.customer_name, t.created_at,o.out_date');
         $this->db->from('transactions t');
         $this->db->join('warehouses w', 'w.id=t.warehouse_id', 'left');
         $this->db->join('customers c', 'c.id=t.customer_id', 'left');
+        $this->db->join('item_out_tb o', 'o.transaction_code=t.transaction_code', 'left');
+        $this->db->group_by('o.transaction_code');
         $this->db->order_by('t.created_at', 'DESC');
         return $query = $this->db->get()->result();
     }
