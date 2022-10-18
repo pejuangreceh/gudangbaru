@@ -26,7 +26,7 @@
                         <form method="POST" action="<?php echo base_url('ItemoutController/save'); ?>">
                             <div class="card-body">
                                 <div class="row justify-content-center">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <label>Transaction Code</label>
                                             <input readonly id="transaction_code" type="text" class="form-control" name="transaction_code" value="<?php echo $new_id; ?>" required>
@@ -42,7 +42,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <label>Warehouse</label>
                                             <select name="warehouse_id" id="warehouse_id" class="form-control select2" style="width: 100%;">
@@ -50,6 +50,12 @@
                                                     <option value="<?= $warehouse->id; ?>"><?= $warehouse->warehouse_name; ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Item Out Date</label>
+                                            <input id="out_date_result" type="date" class="form-control" name="out_date" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -91,12 +97,6 @@
                                         <div class="form-group">
                                             <label>Total Price</label>
                                             <input readonly id="total_price" type="number" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Item Out Date</label>
-                                            <input id="out_date" type="date" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
@@ -141,11 +141,6 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <input readonly id="total_price_result" type="text" class="form-control" name="total_price[]" required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <input readonly id="out_date_result" type="text" class="form-control" name="out_date[]" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
@@ -220,7 +215,7 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
     let total = 0;
     $(document).ready(function() {
         $(".add-more").click(function() {
-            if ((document.getElementById("out_date").value) && (document.getElementById("total_price").value) && (document.getElementById("total_price").value != 0)) {
+            if ((document.getElementById("total_price").value) && (document.getElementById("total_price").value != 0)) {
 
                 var html = $(".copy").html();
                 $(".after-add-more").after(html);
@@ -240,7 +235,6 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
 
                 document.getElementById("selling_price_result").value = document.getElementById("selling_price").value;
                 document.getElementById("total_price_result").value = document.getElementById("total_price").value;
-                document.getElementById("out_date_result").value = document.getElementById("out_date").value;
                 total = parseInt(document.getElementById("total_price_result").value);
                 subtotal += total;
                 document.getElementById("subtotal_result").value = numberWithCommas(subtotal);

@@ -44,6 +44,12 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
+                                            <label>Transaction Date</label>
+                                            <input id="order_date_result" type="date" class="form-control" name="order_date" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
                                             <label>Sub Total</label>
                                             <input readonly id="subtotal_result" type="text" class="form-control" name="subtotal" value="" required>
                                         </div>
@@ -83,12 +89,12 @@
                                             <input readonly id="total_price" type="number" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <!-- <div class="col-sm-2">
                                         <div class="form-group">
                                             <label>Transaction Date</label>
                                             <input id="order_date" type="date" class="form-control" required>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-sm-1">
                                         <div class="form-group">
                                             <label>Action</label>
@@ -131,11 +137,11 @@
                                         <input readonly id="total_price_result" type="text" class="form-control" name="total_price[]" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <!-- <div class="col-sm-2">
                                     <div class="form-group">
                                         <input readonly id="order_date_result" type="date" class="form-control" name="order_date[]" required>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-1">
                                     <div class="form-group">
                                         <button class="btn btn-danger remove" type="button">
@@ -207,7 +213,7 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
     let total = 0;
     $(document).ready(function() {
         $(".add-more").click(function() {
-            if ((document.getElementById("order_date").value) && (document.getElementById("total_price").value) && (document.getElementById("total_price").value != 0)) {
+            if ((document.getElementById("total_price").value) && (document.getElementById("total_price").value != 0)) {
 
                 var html = $(".copy").html();
                 $(".after-add-more").after(html);
@@ -227,7 +233,7 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
 
                 document.getElementById("buying_price_result").value = document.getElementById("buying_price").value;
                 document.getElementById("total_price_result").value = document.getElementById("total_price").value;
-                document.getElementById("order_date_result").value = document.getElementById("order_date").value;
+                // document.getElementById("order_date_result").value = document.getElementById("order_date").value;
                 total = parseInt(document.getElementById("total_price_result").value);
                 subtotal += total;
                 document.getElementById("subtotal_result").value = numberWithCommas(subtotal);

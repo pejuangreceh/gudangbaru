@@ -115,6 +115,8 @@ class ItemoutController extends CI_Controller
     {
         $result = array();
         $item_id = $_POST['item_id'];
+        $out_date = $_POST['out_date'];
+        $out_date_string = new DateTime($out_date);
         $customer_id = $_POST['customer_id'];
         $warehouse_id = $_POST['warehouse_id'];
         $item_total = $_POST['item_total'];
@@ -126,7 +128,6 @@ class ItemoutController extends CI_Controller
         // pengecekkan input
         if (isset($_POST['item_id'])) {
             for ($i = 0; $i < count($_POST['total_price']); $i++) {
-                $out_date = new DateTime($_POST['out_date'][$i]);
                 $result = array(
                     'transaction_code' => $transaction_code,
                     'item_id' => $_POST['item_id'][$i],
@@ -136,7 +137,7 @@ class ItemoutController extends CI_Controller
                     'selling_price' => $_POST['selling_price'][$i],
                     'total_price' => $_POST['total_price'][$i],
                     'status' => 'pending',
-                    'out_date' => $_POST['out_date'][$i],
+                    'out_date' => $out_date,
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 );

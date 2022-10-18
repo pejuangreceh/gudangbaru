@@ -64,6 +64,7 @@ class OrderController extends CI_Controller
     {
         $result = array();
         $item_id = $_POST['item_id'];
+        $order_date = $_POST['order_date'];
         $supplier_id = $_POST['supplier_id'];
         $item_total = $_POST['item_total'];
         $buying_price = $_POST['buying_price'];
@@ -84,7 +85,7 @@ class OrderController extends CI_Controller
                     'total_price' => $_POST['total_price'][$i],
                     'status' => 'pending',
                     'sisa_stok' => $_POST['item_total'][$i],
-                    'order_date' => $_POST['order_date'][$i],
+                    'order_date' => $order_date,
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 );

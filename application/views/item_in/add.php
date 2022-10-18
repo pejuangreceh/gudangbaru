@@ -85,6 +85,12 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-group">
+                                                                <label>Item In Date</label>
+                                                                <input required name="in_date" class="form-control" type="date">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <table class="table table-bordered table-striped">
                                                         <thead>
@@ -96,7 +102,6 @@
                                                                 <th>Total Price</th>
                                                                 <th>Supplier Name</th>
                                                                 <th>Order Date</th>
-                                                                <th>Item In Date</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -115,7 +120,6 @@
                                                                     <input hidden required readonly name="supplier_id" class="form-control" type="text" value="<?= $order->supplier_id ?>">
                                                                     <td><input required readonly name="supplier_name[]" class="form-control" type="text" value="<?= $order->supplier_name ?>"></td>
                                                                     <td><input required readonly name="order_date[]" class="form-control" type="text" value="<?= $order->order_date ?>"></td>
-                                                                    <td><input required name="in_date[]" class="form-control" type="date"></td>
                                                                 </tr>
                                                             <?php } ?>
 

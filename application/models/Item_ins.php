@@ -11,7 +11,7 @@ class Item_ins extends CI_Model
     {
         $this->db->where('transaction_code', $where);
         $this->db->where('o.sisa_stok >', 0);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.status, o.sisa_stok, o.in_date, i.item_name, s.supplier_name, i.buying_price ');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.status, o.sisa_stok, o.order_date, i.item_name, s.supplier_name, i.buying_price ');
         $this->db->from('order_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('suppliers s', 's.id=o.supplier_id', 'left');
