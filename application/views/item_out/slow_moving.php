@@ -47,7 +47,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Item Name</th>
-                                        <th>Total Item In</th>
+                                        <th>Total Item Out</th>
                                         <th>Actual Stock</th>
                                         <th>SKU Number</th>
                                     </tr>

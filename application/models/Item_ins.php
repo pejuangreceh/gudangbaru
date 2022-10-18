@@ -11,7 +11,7 @@ class Item_ins extends CI_Model
     {
         $this->db->where('transaction_code', $where);
         $this->db->where('o.sisa_stok >', 0);
-        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.status, o.sisa_stok, o.created_at, i.item_name, s.supplier_name, i.buying_price ');
+        $this->db->select('o.id, o.transaction_code, o.item_id, o.supplier_id, o.item_total, o.total_price, o.status, o.sisa_stok, o.in_date, i.item_name, s.supplier_name, i.buying_price ');
         $this->db->from('order_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
         $this->db->join('suppliers s', 's.id=o.supplier_id', 'left');
@@ -56,8 +56,8 @@ class Item_ins extends CI_Model
         }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
         if (($periode != NULL)) {
-            $this->db->where('i.created_at >=', $startDate);
-            $this->db->where('i.created_at <=', $endDate);
+            $this->db->where('i.in_date >=', $startDate);
+            $this->db->where('i.in_date <=', $endDate);
         }
         $this->db->select('*, sum(i.item_total) as total, count(i.item_total) as total_transaction ,s.item_name, s.item_code');
         $this->db->from('item_in_tb i');

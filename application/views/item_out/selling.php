@@ -20,7 +20,7 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form method="POST" action="<?= base_url('ItemoutController/list_of_fast_moving/') ?>">
+                            <form method="POST" action="<?= base_url('ItemoutController/list_of_selling/') ?>">
                                 <div class="row justify-content">
                                     <div class="col-sm-3">
                                         <div class="form-group">

@@ -20,7 +20,7 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form method="POST" action="<?= base_url('ItemoutController/list_of_fast_moving/') ?>">
+                            <form method="POST" action="<?= base_url('ItemoutController/list_of_buying/') ?>">
                                 <div class="row justify-content">
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -47,7 +47,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Item Name</th>
-                                        <th>Total Item Out</th>
+                                        <th>Total Item In</th>
                                         <th>Actual Stock</th>
                                         <th>SKU Number</th>
                                     </tr>

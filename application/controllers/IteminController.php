@@ -105,7 +105,7 @@ class IteminController extends CI_Controller
                     'in_date' => $_POST['in_date'][$i],
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
-                    'lead_time' => date_diff($order_date, $now)->days
+                    'lead_time' => date_diff($order_date, $in_date)->days
                 );
                 $this->db->insert('item_in_tb', $result);
                 $result_item = array(

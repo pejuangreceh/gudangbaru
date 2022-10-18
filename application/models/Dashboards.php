@@ -69,10 +69,9 @@ class Dashboards extends CI_Model
             $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
         }
         $endDate   = date('Y-m-d H:i:s', strtotime("now"));
-        // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
         $this->db->where('o.status', 'accepted');
-        $this->db->where('o.created_at >=', $startDate);
-        $this->db->where('o.created_at <=', $endDate);
+        $this->db->where('o.out_date >=', $startDate);
+        $this->db->where('o.out_date <=', $endDate);
         $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,n.max_lead_time,n.avg_lead_time');
         $this->db->from('item_out_tb o');
         $this->db->join('items i', 'i.id=o.item_id', 'left');
@@ -122,7 +121,7 @@ class Dashboards extends CI_Model
         $this->db->from('transactions t');
         $this->db->join('warehouses w', 'w.id=t.warehouse_id', 'left');
         $this->db->join('customers c', 'c.id=t.customer_id', 'left');
-        $this->db->order_by('t.created_at', 'DESC');
+        $this->db->order_by('t.out_date', 'DESC');
         return $query = $this->db->get()->result();
     }
     function read_transaksi_order($where = 'order', $where2 = 'accepted', $where3 = 'stok_in', $where4 = 'done')

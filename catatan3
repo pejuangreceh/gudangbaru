@@ -29,3 +29,50 @@ SELECT o.id as out_id ,i.id as in_id, sum(o.item_total) as total, count(o.item_t
 WHERE 1
 
 SELECT count(item_total) as transaction, avg(item_total) as avg, max(item_total) as highest FROM `item_out_tb` WHERE created_at >= 17-08-2022 OR created_at <= 16-09-2022 
+function read_list_selling($periode = NULL)
+    {
+        if (($periode == NULL) || ($periode == 'week')) {
+            $startDate = date('Y-m-d H:i:s', strtotime("-7 days"));
+        } elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        } elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        if (($periode != NULL)) {
+            $this->db->where('o.created_at >=', $startDate);
+            $this->db->where('o.created_at <=', $endDate);
+        }
+        $this->db->select('*, sum(o.item_total) as total, count(o.item_total) as total_transaction ,s.item_name, s.item_code,n.total_in');
+        $this->db->from('item_out_tb o');
+        $this->db->join('items s', 's.id=o.item_id', 'left');
+        $this->db->join('(SELECT *, sum(item_total) as total_in FROM item_in_tb WHERE 1) as n', 'n.item_id=s.id', 'left', ' GROUP BY item_id');
+        $this->db->group_by('o.item_id');
+        $this->db->order_by('total', 'DESC');
+        return $query = $this->db->get()->result();
+    }
+//SEBELUM UPDATE
+    function read_item_out_fix($periode = NULL)
+    {
+        if (($periode == NULL) || ($periode == 'week')) {
+            $startDate = date('Y-m-d H:i:s', strtotime("-3 days"));
+        } elseif ($periode == 'month') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-30 days"));
+        } elseif ($periode == 'month_3') {
+            $startDate = date('Y-m-d H:i:s', strtotime("-90 days"));
+        }
+        $endDate   = date('Y-m-d H:i:s', strtotime("now"));
+        // $this->db->where('o.created_at BETWEEN  $startDate  AND  $endDate ');
+        $this->db->where('o.status', 'accepted');
+        $this->db->where('o.created_at >=', $startDate);
+        $this->db->where('o.created_at <=', $endDate);
+        $this->db->select('o.item_id, sum(o.item_total) as total, count(o.item_total) as transaction, avg(o.item_total) as avg, max(o.item_total) as highest, i.item_name, u.unit_name, i.stok,i.newest_lead_time,n.max_lead_time,n.avg_lead_time');
+        $this->db->from('item_out_tb o');
+        $this->db->join('items i', 'i.id=o.item_id', 'left');
+        $this->db->join('units u', 'u.id=i.unit_id', 'left');
+        $this->db->join('(SELECT item_id, avg(lead_time) as avg_lead_time, max(lead_time) as max_lead_time FROM item_in_tb WHERE lead_time != 0) as n', 'n.item_id=o.item_id', 'left');
+        $this->db->order_by('total', 'DESC');
+        // $this->db->group_by('o.item_id');
+        $this->db->group_by(array('o.item_id'));
+        return $query = $this->db->get()->result();
+    }

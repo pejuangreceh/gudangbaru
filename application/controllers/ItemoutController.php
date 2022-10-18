@@ -26,11 +26,24 @@ class ItemoutController extends CI_Controller
     }
     public function list_of_selling()
     {
-        $data['judul'] = 'List of Selling';
-        $data['transactions']  = $this->item_outs->read_transaksi();
+        $where = $this->input->post('periode');
+        $data['periode'] = $this->input->post('periode');
+        $data['judul'] = 'List of Sell';
+        $data['transactions']  = $this->item_outs->read_list_selling($where);
         $this->load->view('template/header');
         $this->load->view('template/navbar');
-        $this->load->view('item_out/index', $data);
+        $this->load->view('item_out/selling', $data);
+        $this->load->view('template/footer');
+    }
+    public function list_of_buying()
+    {
+        $where = $this->input->post('periode');
+        $data['periode'] = $this->input->post('periode');
+        $data['judul'] = 'List of Buy';
+        $data['transactions']  = $this->item_outs->read_list_buying($where);
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('item_out/buying', $data);
         $this->load->view('template/footer');
     }
     public function list_of_fast_moving()
