@@ -77,6 +77,7 @@
                                             <!-- <td><?= $out->total ?></td>
                                             <td><?= $out->transaction ?></td> -->
                                             <!-- <td><?= $out->highest ?></td> -->
+                                            <!-- <td><?= $out->unit_name . $out->highest . '-' . $out->max_lead_time . '-' . $out->avg . '-' . $out->avg_lead_time ?></td> -->
                                             <td><?= $out->unit_name ?></td>
                                             <td><?= $out->avg; ?></td>
                                             <!-- <td><?= number_format((float)$out->total, 2, '.', '') ?></td> -->
