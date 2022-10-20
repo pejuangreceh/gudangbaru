@@ -82,9 +82,9 @@
                                             <td><?= $out->avg; ?></td>
                                             <!-- <td><?= number_format((float)$out->total, 2, '.', '') ?></td> -->
                                             <td><?= $out->stok ?></td>
-                                            <td><?= $out->newest_lead_time ?> hari</td>
-                                            <td><?= number_format((float)$out->avg_lead_time, 2, '.', '') ?></td>
-                                            <td><?= $out->max_lead_time ?> hari</td>
+                                            <td><?= $out->newest_lead_time ?> days</td>
+                                            <td><?= number_format((float)$out->avg_lead_time, 2, '.', '') ?> days</td>
+                                            <td><?= $out->max_lead_time ?> days</td>
                                             <td><input readonly name="ltd[]" id="ltd<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= str_replace(',', '.', number_format((float)$LTD, 2, '.', '')) ?>"></td>
                                             <!-- <td><input onchange="updatePrice()" name="safe_stock[]" id="safe_stock<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= str_replace(',', '.', number_format((float)$safe_stock, 2, '.', '')) ?>"></td> -->
                                             <td><input onchange="updatePrice()" name="safe_stock[]" id="safe_stock<?php echo $no - 2; ?>" class="form-control" type="number" value="<?= ceil($safe_stock) ?>"></td>
