@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=" card-body control-group after-add-more">
+                            <div class=" card-body control-group after-add-more" id="after-add-more">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -98,7 +98,7 @@
                                     <div class="col-sm-1">
                                         <div class="form-group">
                                             <label>Action</label>
-                                            <button id="copyValue" class="btn btn-success add-more" type="button">
+                                            <button id="add-more" class="btn btn-success add-more" type="button">
                                                 <i class="glyphicon glyphicon-plus"></i> Add
                                             </button>
                                         </div>
@@ -212,11 +212,11 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
     let subtotal = 0;
     let total = 0;
     $(document).ready(function() {
-        $(".add-more").click(function() {
+        $("#add-more").click(function() {
             if ((document.getElementById("total_price").value) && (document.getElementById("total_price").value != 0)) {
 
                 var html = $(".copy").html();
-                $(".after-add-more").after(html);
+                $("#after-add-more").after(html);
                 // document.getElementById("order_code_result").value = document.getElementById("order_code").value;
 
                 document.getElementById("item_id_result").value = $("#item_id").find(':selected').attr('value');
@@ -237,6 +237,10 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
                 total = parseInt(document.getElementById("total_price_result").value);
                 subtotal += total;
                 document.getElementById("subtotal_result").value = numberWithCommas(subtotal);
+                $('#buying_price').val(''); //add this line
+                $('#item_total').val(''); //add this line
+                $('#total_price').val(''); //add this line
+                $('#item_id').val('');
             }
         });
         // saat tombol remove dklik control group akan dihapus 

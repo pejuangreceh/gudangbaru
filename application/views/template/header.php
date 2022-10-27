@@ -42,5 +42,5 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/toastr/toastr.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 </head>

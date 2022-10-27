@@ -238,6 +238,10 @@ disini semua value akan disimpan dalam id dengan akhiran _result -->
                 total = parseInt(document.getElementById("total_price_result").value);
                 subtotal += total;
                 document.getElementById("subtotal_result").value = numberWithCommas(subtotal);
+                $('#selling_price').val(''); //add this line
+                $('#item_total').val(''); //add this line
+                $('#total_price').val(''); //add this line
+                $('#item_id').val('');
             }
         });
         // saat tombol remove dklik control group akan dihapus 

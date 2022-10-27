@@ -28,7 +28,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID</th>
                                         <th>Item Name</th>
                                         <th>Category</th>
                                         <th>Unit</th>
@@ -68,7 +67,6 @@
                                     ?>
                                         <tr <?php echo ($judul == 'List of Stock') ? $warna : ''; ?>>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $item->id ?></td>
                                             <td><?= $item->item_name ?></td>
                                             <td><?= $item->category_name ?></td>
                                             <td><?= $item->unit_name ?></td>
